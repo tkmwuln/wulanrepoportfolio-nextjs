@@ -1,0 +1,10 @@
+{
+  "description": "Showcase your work with a sleek portfolio designed for creatives and professionals, highlighting projects and skills to attract potential clients.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
