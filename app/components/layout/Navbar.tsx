@@ -46,10 +46,10 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`sticky top-0 z-50 flex items-center justify-between px-4 md:px-8 py-3.5 transition-all duration-500 ${
+        className={`sticky top-2 z-50 mx-2 md:mx-4 flex items-center justify-between px-4 md:px-6 py-2.5 rounded-full border transition-all duration-500 shadow-[0_10px_36px_rgba(40,50,100,0.16)] ${
           scrolled
-            ? "bg-white/30 dark:bg-[#FFFFFF]/50 backdrop-blur-2xl border-b border-white/60 dark:border-white/[0.04] shadow-[0_2px_24px_rgba(0,0,0,0.07)] dark:shadow-[0_4px_40px_rgba(0,0,0,0.7)]"
-            : "bg-white/10 dark:bg-[#FFFFFF]/20 backdrop-blur-xl border-b border-transparent"
+            ? "bg-white/70 dark:bg-[#141622]/95 backdrop-blur-2xl border-white/70 dark:border-white/10"
+            : "bg-white/60 dark:bg-[#141622]/90 backdrop-blur-xl border-white/60 dark:border-white/10"
         }`}
       >
         {/* Logo */}
