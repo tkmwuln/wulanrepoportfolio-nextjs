@@ -4,7 +4,7 @@ import Link from "next/link";
 import ProjectCard from "../portfolio/ProjectCard";
 import { useLang } from "../../context/LangContext";
 
-const STATIC_PROJECTS = [
+export const HOME_PROJECTS = [
   {
     id: "s1",
     title: "E-Health Platform — SIMRS Kesehatan",
@@ -83,6 +83,19 @@ const STATIC_PROJECTS = [
     published: true,
     gradient: "linear-gradient(140deg, #141e30 0%, #243b55 100%)", // Soft Midnight Blue
   },
+  {
+    id: "s7",
+    title: "Le Nusa Paris — Digital Experience",
+    slug: "website-lenusa",
+    description: "An immersive restaurant website where Indonesian culinary heritage, cultural storytelling, and a seamless reservation journey meet.",
+    image: null,
+    category: "Website",
+    clientName: "Le Nusa Paris",
+    projectYear: 2025,
+    metricValue: null,
+    published: true,
+    gradient: "linear-gradient(140deg, #6b0006 0%, #d11117 100%)", // Deep Red
+  },
 ];
 
 type Project = {
@@ -99,9 +112,9 @@ type Project = {
   gradient?: string;
 };
 
-export default function HomeProjectsSection({ projects }: { projects: Project[] }) {
+export default function HomeProjectsSection({ projects }: { projects?: Project[] }) {
   const { t } = useLang();
-  const display = projects.length > 0 ? projects : STATIC_PROJECTS;
+  const display = projects && projects.length > 0 ? projects : HOME_PROJECTS;
 
   return (
     <section id="projects" className="pt-6">
@@ -118,7 +131,7 @@ export default function HomeProjectsSection({ projects }: { projects: Project[] 
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {display.slice(0, 6).map((project, index) => (
+        {display.slice(0, 7).map((project, index) => (
           <ProjectCard
             key={project.id}
             title={project.title}

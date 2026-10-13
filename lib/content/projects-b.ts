@@ -1,4 +1,4 @@
-import { b, type ProjectDetail } from "../content-types"
+import { b, type ProjectDetail } from "./types"
 
 export const projectsB: Record<string, ProjectDetail> = {
   "design-system": {

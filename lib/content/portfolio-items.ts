@@ -1,0 +1,133 @@
+export type PortfolioItem = {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  category: string;
+  tags: string[];
+  clientName: string;
+  projectYear: number;
+  metric: string;
+  gradient: string;
+  featured: boolean;
+};
+
+export const PORTFOLIO_ITEMS: PortfolioItem[] = [
+  {
+    id: "s1",
+    title: "E-Health Platform — SIMRS Kesehatan",
+    slug: "simrs-kesehatan",
+    description: "End-to-end UX design for hospital management system serving 50k+ monthly users across Indonesia's health ecosystem. Developed SIMRS, SIMKLINIK, and vaccination health ecosystem design.",
+    category: "Govtech",
+    tags: ["UX Design", "Service Design"],
+    clientName: "Telkom Indonesia",
+    projectYear: 2024,
+    metric: "50k+ MAU",
+    gradient: "linear-gradient(140deg, #2c3e50 0%, #3498db 100%)",
+    featured: true,
+  },
+  {
+    id: "s2",
+    title: "Strategic CX Platform",
+    slug: "cx-platform",
+    description: "Designed and led UX for Telkom's customer experience platform — improving conversion by 38% across checkout flows through research-driven redesign.",
+    category: "B2B SaaS",
+    tags: ["CX Design", "Product Strategy"],
+    clientName: "Telkom Indonesia",
+    projectYear: 2023,
+    metric: "+38% Conversion",
+    gradient: "linear-gradient(140deg, #0f2027 0%, #203a43 50%, #2c5364 100%)",
+    featured: true,
+  },
+  {
+    id: "s3",
+    title: "Government Procurement UX",
+    slug: "lkpp-procurement",
+    description: "Service design & UX lead for LKPP (National Procurement Agency) digital procurement platform. Streamlined complex government procurement flows.",
+    category: "Govtech",
+    tags: ["Service Design", "Government"],
+    clientName: "LKPP",
+    projectYear: 2024,
+    metric: "10M+ Users",
+    gradient: "linear-gradient(140deg, #4b1248 0%, #f0c27b 100%)",
+    featured: true,
+  },
+  {
+    id: "s4",
+    title: "Fintech Onboarding — D7 Retention",
+    slug: "fintech-onboarding",
+    description: "Redesigned fintech onboarding flow that improved 7-day retention by 61% using cognitive psychology principles and behavior-driven design.",
+    category: "Fintech",
+    tags: ["UX Design", "Onboarding"],
+    clientName: "WeekndLabs Studio",
+    projectYear: 2022,
+    metric: "+61% D7 Retention",
+    gradient: "linear-gradient(140deg, #373b44 0%, #4286f4 100%)",
+    featured: false,
+  },
+  {
+    id: "s5",
+    title: "Design System — 200+ Components",
+    slug: "design-system",
+    description: "Built a comprehensive design system from scratch with 200+ tokens and components for multi-product ecosystem, including documentation and governance framework.",
+    category: "Design System",
+    tags: ["Design System", "Component Library"],
+    clientName: "WeekndLabs Studio",
+    projectYear: 2021,
+    metric: "200+ Components",
+    gradient: "linear-gradient(140deg, #1a1c2c 0%, #4a192c 100%)",
+    featured: false,
+  },
+  {
+    id: "s6",
+    title: "INA DIGITAL — National Identity Platform",
+    slug: "ina-digital",
+    description: "Currently leading product management and design at INA Digital, Indonesia's national digital identity and government service platform.",
+    category: "Govtech",
+    tags: ["Product Management", "Government"],
+    clientName: "INA DIGITAL",
+    projectYear: 2025,
+    metric: "National Scale",
+    gradient: "linear-gradient(140deg, #141e30 0%, #243b55 100%)",
+    featured: true,
+  },
+  {
+    id: "s7",
+    title: "Blockchain Service Design",
+    slug: "blockchain-service",
+    description: "UX and service design for blockchain-based government services, simplifying complex decentralized workflows for non-technical users.",
+    category: "Blockchain",
+    tags: ["Blockchain", "Service Design"],
+    clientName: "WeekndLabs Studio",
+    projectYear: 2023,
+    metric: "3 Products",
+    gradient: "linear-gradient(140deg, #1f1c2c 0%, #928dab 100%)",
+    featured: false,
+  },
+  {
+    id: "s8",
+    title: "EMR & Vaccination Ecosystem",
+    slug: "emr-vaccination",
+    description: "Electronic Medical Records and vaccination management UX design, part of Indonesia's Satu Sehat (One Digital Health) initiative.",
+    category: "E-Health",
+    tags: ["E-Health", "UX Design"],
+    clientName: "Telkom Indonesia",
+    projectYear: 2024,
+    metric: "Satu Sehat",
+    gradient: "linear-gradient(140deg, #2b5876 0%, #4e4376 100%)",
+    featured: false,
+  },
+  {
+    id: "s9",
+    title: "Le Nusa Paris — Digital Experience",
+    slug: "website-lenusa",
+    description: "An immersive restaurant website where Indonesian culinary heritage, cultural storytelling, and a seamless reservation journey meet.",
+    category: "Website",
+    tags: ["Website", "Development"],
+    clientName: "Le Nusa Paris",
+    projectYear: 2025,
+    metric: "Live Experience",
+    gradient: "linear-gradient(140deg, #6b0006 0%, #d11117 100%)",
+    featured: true,
+  },
+];

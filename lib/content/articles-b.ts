@@ -1,4 +1,4 @@
-import { b, type ArticleDetail } from "../content-types"
+import { b, type ArticleDetail } from "./types"
 
 export const articlesB: Record<string, ArticleDetail> = {
   "fintech-onboarding-lessons": {

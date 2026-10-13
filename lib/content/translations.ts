@@ -1,4 +1,4 @@
-import type { Lang } from "./content"
+import type { Lang } from "./index"
 
 const map: Record<string, string> = {
   // filters & labels

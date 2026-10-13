@@ -1,4 +1,4 @@
-import { b, type ArticleDetail } from "../content-types"
+import { b, type ArticleDetail } from "./types"
 
 export const articlesA: Record<string, ArticleDetail> = {
   "cognitive-psychology-ux-design": {

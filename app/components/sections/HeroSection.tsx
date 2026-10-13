@@ -55,9 +55,11 @@ const defaultIndustries = [
   { label: "Fintech", colorClass: "pill-violet" },
   { label: "B2B SaaS", colorClass: "pill-green" },
   { label: "Govtech", colorClass: "pill-amber" },
+  { label: "Health", colorClass: "pill-blue" },
+  { label: "F&B", colorClass: "pill-violet" },
 ];
 
-const COLLABORATORS = ["Gojek", "Tokopedia", "Bank Jago", "Traveloka"];
+const COLLABORATORS = ["Gojek", "Tokopedia", "Kemenkes RI", "LKPP", "Telkom", "BNI", "Prudential"];
 const EXPERTISE = ["UX Research", "PRD", "Figma", "OKR", "A/B Test", "Design Sys.", "Roadmap", "SQL"];
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/putriwulandari-ptrwuln/";
@@ -204,7 +206,7 @@ export default function HeroSection({
         <div className="grid grid-cols-2 gap-1.5">
           {[
             { num: `${yearsExperience}yr`, label: t("stat.exp") },
-            { num: "4★", label: t("stat.rating") },
+            { num: "4.9★", label: t("stat.rating") },
           ].map((s) => (
             <div key={s.label} className="rounded-xl py-2 text-center" style={{ background: "rgba(255,255,255,.07)" }}>
               <div className="font-display text-[18px] font-extrabold text-white leading-none">{s.num}</div>
