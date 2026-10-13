@@ -117,7 +117,7 @@ export default function AdminProjectsPage() {
         {/* Filter tabs */}
         <div className="flex gap-2 mb-5">
           {(['all', 'published', 'draft'] as const).map(f => (
-            <button key={f} onClick={() => setFilter(f)} className={`flex items-center gap-1.5 px-4 py-1.5 rounded-pill text-[12px] font-semibold transition-all border cursor-pointer ${filter === f ? 'bg-ink text-white border-ink dark:bg-white dark:text-white dark:border-white' : 'bg-card2 text-ink-2 border-[var(--border)] hover:border-ink hover:text-ink'}`}>
+            <button key={f} onClick={() => setFilter(f)} className={`flex items-center gap-1.5 px-4 py-1.5 rounded-pill text-[12px] font-semibold transition-all border cursor-pointer ${filter === f ? 'bg-ink border-ink text-[var(--card-bg)]' : 'bg-card2 text-ink-2 border-[var(--border)] hover:border-ink hover:text-ink'}`}>
               {f === 'all' ? 'All' : f === 'published' ? 'Published' : 'Draft'}
               <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${filter === f ? 'bg-white/20 text-white dark:bg-black/20 dark:text-inherit' : 'bg-[var(--border)] text-ink-3'}`}>
                 {f === 'all' ? projects.length : f === 'published' ? projects.filter(p => p.published).length : projects.filter(p => !p.published).length}

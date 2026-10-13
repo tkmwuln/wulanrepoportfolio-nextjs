@@ -163,7 +163,7 @@ export default function DashboardContentPage() {
         {/* Tabs */}
         <div className="flex gap-2 mb-6 flex-wrap">
           {TABS.map(tab => (
-            <button key={tab.key} onClick={() => setActiveTab(tab.key)} className={`px-4 py-2 rounded-pill text-[13px] font-semibold border transition-all cursor-pointer ${activeTab === tab.key ? 'bg-ink text-white border-ink dark:bg-white dark:text-white dark:border-white' : 'bg-card2 text-ink-2 border-[var(--border)] hover:text-ink hover:border-ink'}`}>
+            <button key={tab.key} onClick={() => setActiveTab(tab.key)} className={`px-4 py-2 rounded-pill text-[13px] font-semibold border transition-all cursor-pointer ${activeTab === tab.key ? 'bg-ink border-ink text-[var(--card-bg)]' : 'bg-card2 text-ink-2 border-[var(--border)] hover:text-ink hover:border-ink'}`}>
               {tab.label}
             </button>
           ))}
