@@ -1,55 +1,69 @@
-import Link from "next/link";
+"use client";
 
-const EXPERIENCE = [
-  {
-    company: "INA DIGITAL",
-    role: "Product Manager & Design",
-    period: "Nov 2025 – Present",
-    duration: "5 months",
-    location: "Jakarta, Indonesia",
-    logo: "🏛️",
-    description: "Leading product management and design at Indonesia's national digital transformation agency. Developing national digital identity and government service platforms.",
-    current: true,
-  },
-  {
-    company: "Telkom Indonesia",
-    role: "UX Designer Lead",
-    period: "Oct 2024 – Nov 2025",
-    duration: "1 yr 2 mo",
-    location: "Indonesia",
-    logo: "📡",
-    description: "Leading solution designer for complex digital products including Telkom's Strategic CX Platform, LKPP Government Procurement, and E-Health ecosystem (SIMRS, SIMKLINIK, EMR, vaccination).",
-    current: false,
-  },
-  {
-    company: "Telkom Indonesia",
-    role: "UX Design Lead",
-    period: "Jun 2023 – Nov 2025",
-    duration: "2 yrs 6 mo",
-    location: "Jakarta, Indonesia",
-    logo: "📡",
-    description: "Facilitation & Initiative design standardization. Lead and facilitator of 11 design tribe technology commercialization teams. Building a love of user-centric product design.",
-    current: false,
-  },
-  {
-    company: "WeekndLabs Studio",
-    role: "Crafting & Founding",
-    period: "Feb 2018 – Feb 2026",
-    duration: "8 yrs 1 mo",
-    location: "Bandung",
-    logo: "⚡",
-    description: "Co-founded design studio offering DevOps, Application Development, UI/UX Service, and Illustrator Service. Built design systems, blockchain UX, and fintech products.",
-    current: false,
-  },
+import { useState } from "react";
+import { useLang } from "../context/LangContext";
+import { tr } from "../../lib/content/translations";
+
+const SERVICES: [string, string, string][] = [
+  ["UX", "UX Design", "End-to-end user experience design from research to delivery"],
+  ["UR", "UX Research", "Qualitative and quantitative research, usability testing"],
+  ["SD", "Service Design", "Service blueprints, journey maps, and systems thinking"],
+  ["PM", "Project Management", "Agile PM, roadmaps, and stakeholder alignment"],
+  ["ID", "Interaction Design", "Micro-interactions, prototyping, and motion design"],
+  ["WD", "Web Design", "Responsive web design and scalable design systems"],
 ];
 
-const SERVICES = [
-  { icon: "🎨", name: "UX Design", desc: "End-to-end user experience design from research to delivery" },
-  { icon: "🔬", name: "UX Research", desc: "Qualitative & quantitative research, usability testing" },
-  { icon: "🗺️", name: "Service Design", desc: "Service blueprints, journey maps, systems thinking" },
-  { icon: "📋", name: "Project Management", desc: "Agile PM, roadmap, stakeholder alignment" },
-  { icon: "🤝", name: "Interaction Design", desc: "Micro-interactions, prototyping, motion design" },
-  { icon: "🌐", name: "Web Design", desc: "Responsive web design and design systems" },
+const CAREER = [
+  {
+    company: "INADIGITAL Health (IDH) · Kemenkes Indonesia",
+    title: "Product Manager & Design",
+    period: "Oct 2025 – Present",
+    location: "Jakarta",
+    points: [
+      "Led product requirements and delivery, enabling Puskesmas to track preventive healthcare screening across patient life cycles. Ensured personal data protection compliance and supported national health mapping and regulatory decision-making.",
+      "Managed CKG and routine screening programs spanning NCDs, substance abuse, mental, adolescent, geriatric and environmental health, and smoking cessation. Developed Ayo CKG for self-registration and initial screening, plus program evaluation and reporting dashboards.",
+      "Worked with working units, District Health Offices, vendors and primary healthcare providers, alongside cross-functional engineering, security, QA, product, design, research, content, marketing and support teams.",
+      "Handled requirements, sprint planning, alignment, report updates, product versions, error management and research evaluation, using NPS, CSAT and UTAUT to guide feature improvements.",
+    ],
+  },
+  {
+    company: "PT Telkom Indonesia Tbk",
+    title: "UX Designer Lead",
+    period: "Oct 2022 – Sept 2025",
+    location: "Jakarta",
+    points: [
+      "Leading solution designer for complex digital products, driven by research, and orchestrating all stakeholders.",
+      "This journey is built on a passion for product design centered on good user experiences.",
+      "In my role, I collaborate with product teams, technology teams, other stakeholders, and customers to gather, understand, and define requirements, and ultimately design exceptional user experiences.",
+      "Coordinate and align with other teams to ensure that research will impact users, business objectives, and the organization.",
+    ],
+  },
+  {
+    company: "PT Bank Negara Indonesia (Persero) Tbk.",
+    title: "Digital Experience Designer",
+    period: "Dec 2020 – Oct 2022",
+    location: "Jakarta",
+    points: [
+      "Responsible for developing a design system focused on simplicity and efficiency, eliminating inconsistency, and increasing speed to produce new products.",
+      "Redesigning the mobile banking project.",
+    ],
+  },
+  {
+    company: "PT Kreasi Lebah Aktif (Strongbee)",
+    title: "UIX Designer",
+    period: "May 2019 – Nov 2020",
+    location: "Jakarta",
+    points: ["Conduct research to explore and identify user pain points."],
+  },
+  {
+    company: "PT Prudential Life Assurance Indonesia",
+    title: "UIX Designer",
+    period: "Dec 2018 – Apr 2019",
+    location: "Jakarta",
+    points: [
+      "Worked as a user experience designer, conducting research to explore and identify user problems with user flow and process flow, and developing wireframes on the Pulse Apps project by Prudential.",
+    ],
+  },
 ];
 
 const SKILLS = [
@@ -60,71 +74,74 @@ const SKILLS = [
 ];
 
 export default function AboutPage() {
+  const { lang, t } = useLang();
+  const [openRole, setOpenRole] = useState(0);
+
   return (
     <div className="min-h-screen bg-page">
       <div className="mx-auto w-full max-w-[1280px] px-4 md:px-6 py-8 md:py-12 space-y-6 md:space-y-8">
+        <div className="mb-2">
+          <p className="label uppercase tracking-widest text-ink-3 mb-3">{t("about.eyebrow")}</p>
+          <h1 className="font-display text-[40px] font-extrabold tracking-tighter leading-none text-ink">
+            {t("about.my")} <span className="text-gradient">{t("about.profile")}</span>
+          </h1>
+        </div>
 
-
-        <div
-          className="rounded-[var(--r-xl)] p-8 md:p-12 flex flex-col md:flex-row items-start gap-8 relative overflow-hidden"
-          style={{ background: "linear-gradient(140deg, #0d0f1a 0%, #1a1f42 100%)" }}
-        >
+        {/* Hero */}
+        <div className="rounded-[var(--r-xl)] overflow-hidden grid grid-cols-1 md:grid-cols-2 card">
+          {/* Left: photo + availability + name */}
           <div
-            className="absolute -top-20 -right-20 w-96 h-96 rounded-full pointer-events-none"
-            style={{ background: "radial-gradient(circle, rgba(61,90,241,.2) 0%, transparent 70%)" }}
-          />
-
-          {/* Avatar */}
-          <div className="w-24 h-24 rounded-full overflow-hidden relative shrink-0 ring-4 ring-white/10">
-            <img
-              src="/images/profile-pic.png"
-              alt="Putri Wulandari"
-              className="object-cover w-full h-full absolute inset-0 z-10 bg-card"
-            />
-            {/* Fallback initials */}
-            <div className="w-full h-full absolute inset-0 z-0 flex items-center justify-center bg-gradient-to-br from-accent to-violet text-white text-2xl font-bold font-display">
-              PW
+            className="p-8 md:p-10 flex flex-col justify-center relative overflow-hidden"
+            style={{ background: "linear-gradient(135deg, #dce6fb 0%, #eef0f8 60%)" }}
+          >
+            <div className="w-20 h-20 rounded-full overflow-hidden relative shrink-0 ring-4 ring-white/60 mb-4">
+              <img
+                src="/images/profile-pic.png"
+                alt="Putri Wulandari"
+                className="object-cover w-full h-full absolute inset-0 z-10 bg-card"
+              />
+              <div className="w-full h-full absolute inset-0 z-0 flex items-center justify-center bg-gradient-to-br from-accent to-violet text-white text-xl font-bold font-display">
+                PW
+              </div>
             </div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-2 h-2 rounded-full bg-success shadow-[0_0_0_3px_rgba(34,201,129,.2)]" />
+              <span className="text-[11px] text-ink-2">{t("about.available")}</span>
+            </div>
+            <h2 className="font-display text-[28px] font-extrabold text-ink tracking-tight leading-tight mb-1">
+              Putri Wulandari
+            </h2>
+            <p className="text-ink-3 text-[13px]">{t("about.headline")}</p>
           </div>
 
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-3">
-              <span className="w-2.5 h-2.5 rounded-full bg-success shadow-[0_0_0_4px_rgba(34,201,129,.2)]" />
-              <span className="text-[12px] text-white/60">Available for new opportunities</span>
-            </div>
-            <h1 className="font-display text-[42px] font-extrabold text-white tracking-tight leading-tight mb-2">
-              Putri Wulandari
-            </h1>
-            <p className="text-white/50 text-[15px] mb-4">
-              AI Product Manager · Service Designer · UX Lead
-            </p>
-            <p className="text-white/70 max-w-xl leading-relaxed text-sm">
-              💫 I&apos;m a digital Product Manager and Service Designer. I love using cognitive psychology to humanize tech and solve people problems. I am a keen learner, team player, and enjoy taking on new challenges and side projects.
+          {/* Right: statement + CTAs */}
+          <div className="p-8 md:p-10 flex flex-col justify-center bg-card">
+            <p className="text-ink leading-relaxed text-[17px]">
+              {t("about.statement_a")}
+              <span className="text-accent font-semibold">{t("about.statement_b")}</span>
+              {t("about.statement_c")}
             </p>
             <div className="flex flex-wrap gap-3 mt-6">
               <a
                 href="https://www.linkedin.com/in/putriwulandari-ptrwuln/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-accent text-[13px] py-2.5 px-5"
+                className="btn-primary text-[13px] py-2.5 px-5"
               >
-                Connect on LinkedIn ↗
+                {t("about.linkedin")} ↗
+              </a>
+              <a href="mailto:ptr.wuln@gmail.com"
+                className="inline-flex items-center gap-2 font-medium cursor-pointer no-underline transition-all duration-200 px-5 py-2.5 rounded-pill text-[13px] text-ink-2 hover:text-ink border border-[var(--border)] hover:border-ink-2"
+              >
+                {t("about.email")}
               </a>
               <a
-                href="https://drive.google.com/file/d/1TUy0n71AlVlbuL9dx5qte_1tGUB7EPVu/view"
+                href="https://www.figma.com/proto/vzr3JyEeD2zLp4KWjwLzeL/CV-wulan?node-id=6938-37&t=l96CCQjtU1DG1ET7-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-medium cursor-pointer no-underline transition-all duration-200 px-5 py-2.5 rounded-pill text-[13px] text-white/70 hover:text-white border border-white/20 hover:border-white/50"
+                className="inline-flex items-center gap-2 font-medium cursor-pointer no-underline transition-all duration-200 px-5 py-2.5 rounded-pill text-[13px] text-ink-2 hover:text-ink border border-[var(--border)] hover:border-ink-2"
               >
-                Download CV ↓
-              </a>
-              <a
-                href="https://ptrwulan.notion.site/Hey-I-m-Putri-Wulandari-bc84907898ac4321b9dc987c5f3043cb"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-medium cursor-pointer no-underline transition-all duration-200 px-5 py-2.5 rounded-pill text-[13px] text-white/70 hover:text-white border border-white/20 hover:border-white/50"
-              >
-                Notion Portfolio ↗
+                {t("about.cv")}
               </a>
             </div>
           </div>
@@ -132,70 +149,81 @@ export default function AboutPage() {
 
         {/* Services */}
         <div className="card p-8">
-          <p className="label uppercase tracking-widest text-ink-3 mb-2">What I Do</p>
-          <h2 className="font-display text-2xl font-bold text-ink tracking-tight mb-6">Services</h2>
+          <p className="label uppercase tracking-widest text-ink-3 mb-2">{t("about.what_i_do")}</p>
+          <h2 className="font-display text-2xl font-bold text-ink tracking-tight mb-6">{t("about.services")}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {SERVICES.map((s) => (
-              <div key={s.name} className="p-5 rounded-[var(--r)] bg-card2 border border-[var(--border)] hover:border-accent/30 transition-colors duration-200">
-                <div className="text-2xl mb-3">{s.icon}</div>
-                <h3 className="font-display font-bold text-ink text-[15px] mb-1">{s.name}</h3>
-                <p className="text-ink-2 text-[12px] leading-relaxed">{s.desc}</p>
+            {SERVICES.map(([short, title, description]) => (
+              <div key={title} className="p-5 rounded-[var(--r)] bg-card2 border border-[var(--border)] hover:border-accent/30 transition-colors duration-200">
+                <div className="w-9 h-9 rounded-full bg-accent-soft text-accent flex items-center justify-center font-display font-bold text-[13px] mb-3">
+                  {short}
+                </div>
+                <h3 className="font-display font-bold text-ink text-[15px] mb-1">{tr(lang, title)}</h3>
+                <p className="text-ink-2 text-[12px] leading-relaxed">{tr(lang, description)}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Experience */}
+        {/* Career */}
         <div className="card p-8">
-          <p className="label uppercase tracking-widest text-ink-3 mb-2">Career</p>
-          <h2 className="font-display text-2xl font-bold text-ink tracking-tight mb-6">Experience</h2>
-          <div className="space-y-0">
-            {EXPERIENCE.map((exp, i) => (
-              <div key={i} className="flex gap-5 pb-8 relative">
-                {/* Timeline line */}
-                {i < EXPERIENCE.length - 1 && (
-                  <div className="absolute left-5 top-10 bottom-0 w-[1px] bg-[var(--border)]" />
-                )}
-                {/* Logo circle */}
-                <div className="w-10 h-10 rounded-full bg-card2 border border-[var(--border)] flex items-center justify-center text-lg shrink-0 z-10">
-                  {exp.logo}
+          <p className="label uppercase tracking-widest text-ink-3 mb-2">{t("about.career")}</p>
+          <h2 className="font-display text-2xl font-bold text-ink tracking-tight mb-6">{t("about.experience")}</h2>
+          <div className="space-y-2">
+            {CAREER.map((role, index) => {
+              const open = openRole === index;
+              return (
+                <div key={`${role.company}-${role.title}`} className="rounded-[var(--r)] border border-[var(--border)] overflow-hidden">
+                  <button
+                    type="button"
+                    aria-expanded={open}
+                    onClick={() => setOpenRole(open ? -1 : index)}
+                    className="w-full flex items-center gap-4 p-4 text-left cursor-pointer bg-transparent"
+                  >
+                    <span className="font-display font-bold text-ink-3 text-sm w-8 shrink-0">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex-1 min-w-0">
+                      <span className="block font-display font-bold text-ink text-[15px]">{tr(lang, role.title)}</span>
+                      <span className="block text-ink-2 text-[13px]">{role.company}</span>
+                    </span>
+                    <span className="hidden sm:block text-right shrink-0">
+                      <span className="block font-semibold text-ink text-[12px]">{tr(lang, role.period)}</span>
+                      <span className="block text-ink-3 text-[11px]">{role.location}</span>
+                    </span>
+                    <span className={`shrink-0 text-ink-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`}>⌄</span>
+                  </button>
+                  {open && (
+                    <ul className="px-4 pb-5 pl-16 space-y-2 list-disc text-ink-2 text-[13px] leading-relaxed">
+                      {role.points.map((point) => (
+                        <li key={point}>{tr(lang, point)}</li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-                <div>
-                  <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <h3 className="font-display font-bold text-ink text-[15px]">{exp.role}</h3>
-                    {exp.current && (
-                      <span className="text-[10px] bg-success/15 text-success px-2 py-0.5 rounded-pill font-semibold">Current</span>
-                    )}
-                  </div>
-                  <p className="text-accent text-[13px] font-semibold">{exp.company}</p>
-                  <p className="text-ink-3 text-[12px] mt-0.5 mb-2">
-                    {exp.period} · {exp.duration} · {exp.location}
-                  </p>
-                  <p className="text-ink-2 text-[13px] leading-relaxed">{exp.description}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
         {/* Skills */}
         <div className="card p-8">
-          <p className="label uppercase tracking-widest text-ink-3 mb-2">Expertise</p>
-          <h2 className="font-display text-2xl font-bold text-ink tracking-tight mb-6">Skills & Tools</h2>
+          <p className="label uppercase tracking-widest text-ink-3 mb-2">{t("about.expertise")}</p>
+          <h2 className="font-display text-2xl font-bold text-ink tracking-tight mb-6">{t("about.skills")}</h2>
           <div className="flex flex-wrap gap-2">
             {SKILLS.map((skill) => (
-              <span key={skill} className="expertise-tag">{skill}</span>
+              <span key={skill} className="expertise-tag">{tr(lang, skill)}</span>
             ))}
           </div>
         </div>
 
         {/* CTA */}
         <div className="card p-8 text-center">
+          <p className="label uppercase tracking-widest text-ink-3 mb-2">{t("about.work_together")}</p>
           <h2 className="font-display text-2xl font-bold text-ink tracking-tight mb-2">
-            Let&apos;s Work Together
+            {t("about.cta_title")}
           </h2>
           <p className="text-ink-2 text-sm mb-6 max-w-md mx-auto">
-            Open to PM, UX Lead, and Service Design opportunities. 500+ connections on LinkedIn.
+            {t("about.cta_text")}
           </p>
           <a
             href="https://www.linkedin.com/in/putriwulandari-ptrwuln/"
@@ -203,7 +231,7 @@ export default function AboutPage() {
             rel="noopener noreferrer"
             className="btn-primary"
           >
-            Connect on LinkedIn ↗
+            {t("about.linkedin")} ↗
           </a>
         </div>
       </div>

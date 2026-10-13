@@ -1,24 +1,14 @@
 import { createClient } from '@/utils/supabase/server'
 import { cookies } from 'next/headers'
-import Link from 'next/link'
-import ProjectCard from './components/portfolio/ProjectCard'
 import BentoMetrics, { defaultMetrics } from './components/sections/BentoMetrics'
 import HeroSection from './components/sections/HeroSection'
-import HomeProjectsSection from './components/sections/HomeProjectsSection'
+import HomeProjectsSection, { HOME_PROJECTS } from './components/sections/HomeProjectsSection'
 
 export default async function HomePage() {
   const cookieStore = await cookies()
   const supabase = createClient(cookieStore)
 
-  // Fetch featured projects
-  const { data: projects } = await supabase
-    .from('projects')
-    .select('*')
-    .eq('published', true)
-    .order('createdAt', { ascending: false })
-    .limit(6)
-
-  // Fetch user profile
+  // Fetch user profile (editable via dashboard); portfolio content itself is static, see HOME_PROJECTS
   const { data: user } = await supabase
     .from('users')
     .select('*')
@@ -36,9 +26,9 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen bg-page">
       <div className="mx-auto w-full max-w-[1280px] px-6 py-8 space-y-3">
-        <HeroSection profile={profile} projectCount={projects?.length ?? 0} />
+        <HeroSection profile={profile} projectCount={HOME_PROJECTS.length} />
         <BentoMetrics metrics={defaultMetrics} />
-        <HomeProjectsSection projects={projects ?? []} />
+        <HomeProjectsSection />
       </div>
     </div>
   )
