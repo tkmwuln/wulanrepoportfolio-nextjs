@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap");
 @import "tailwindcss";
+@config "../tailwind.config.ts";
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* Design System v2 */
@@ -27,8 +27,8 @@
     --r: 20px;
     --r-lg: 28px;
     --r-xl: 36px;
-    --font-display: "Bricolage Grotesque", sans-serif;
-    --font-body: "Plus Jakarta Sans", sans-serif;
+    /* --font-display and --font-body are supplied by next/font (see app/fonts.ts),
+       applied via a className on <html> in app/layout.tsx. */
   }
 
   /* ── Dark mode overrides ── */
@@ -96,6 +96,7 @@
   .delay-200 { animation-delay: 0.2s; }
   .delay-300 { animation-delay: 0.3s; }
   .delay-400 { animation-delay: 0.4s; }
+  .animate-sparkle-fade { animation: sparkleFade 0.65s ease-out forwards; }
 }
 
 @layer components {
@@ -131,7 +132,7 @@
 
   /* Desktop: full bento */
   @media (min-width: 1024px) {
-    .bento-hero { grid-template-columns: 1fr 260px 260px; height: 380px; }
+    .bento-hero { grid-template-columns: 1fr 260px 260px; height: auto; }
     .bento-metrics { grid-template-columns: repeat(4, 1fr); height: 180px; }
     .bento-content { grid-template-columns: 220px 1fr 1fr 180px; height: 200px; }
     .bento-blog { grid-template-columns: repeat(3, 1fr); }
@@ -222,10 +223,10 @@
     white-space: nowrap;
   }
 
-  .pill-blue { background: var(--accent-soft); color: var(--accent); }
-  .pill-violet { background: var(--violet-soft); color: var(--violet); }
-  .pill-green { background: #e8fff4; color: #0f8f56; }
-  .pill-amber { background: #fff5e0; color: #b57a0a; }
+  .pill-blue { background: var(--accent-soft); color: #6478e0; }
+  .pill-violet { background: var(--violet-soft); color: #9872f5; }
+  .pill-green { background: #e8fff4; color: #3aa873; }
+  .pill-amber { background: #fff5e0; color: #c89a3d; }
 
   /* Dark mode pill fixes */
   .dark .pill-green { background: rgba(34,201,129,0.15); color: #4ade9a; }
@@ -273,6 +274,31 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+@keyframes sparkleFade {
+  0% { opacity: 1; transform: scale(1) translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: scale(0.3) translateY(-16px) rotate(25deg); }
+}
+
+@keyframes wingFlapLeft {
+  0%, 100% { transform: rotate(0deg) scaleY(1); }
+  50% { transform: rotate(-30deg) scaleY(0.7); }
+}
+
+@keyframes wingFlapRight {
+  0%, 100% { transform: rotate(0deg) scaleY(1); }
+  50% { transform: rotate(30deg) scaleY(0.7); }
+}
+
+.wing-left { animation: wingFlapLeft 0.5s ease-in-out infinite; }
+.wing-right { animation: wingFlapRight 0.5s ease-in-out infinite; }
+
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-3px); opacity: 0.75; }
+}
+
+.fairy-orb { animation: orbFloat 1.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 
 .prose {
   --tw-prose-headings: var(--fg);

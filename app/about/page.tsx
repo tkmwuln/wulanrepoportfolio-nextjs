@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { useLang } from "../context/LangContext";
 import { tr } from "../../lib/content/translations";
+import { SOFT_PURPLE_BLOB } from "../../lib/gradients";
+import ArrowIcon from "../components/ui/ArrowIcon";
+import CvGateModal from "../components/CvGateModal";
 
 const SERVICES: [string, string, string][] = [
   ["UX", "UX Design", "End-to-end user experience design from research to delivery"],
@@ -76,6 +79,7 @@ const SKILLS = [
 export default function AboutPage() {
   const { lang, t } = useLang();
   const [openRole, setOpenRole] = useState(0);
+  const [cvModalOpen, setCvModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-page">
@@ -90,28 +94,28 @@ export default function AboutPage() {
         {/* Hero */}
         <div className="rounded-[var(--r-xl)] overflow-hidden grid grid-cols-1 md:grid-cols-2 card">
           {/* Left: photo + availability + name */}
-          <div
-            className="p-8 md:p-10 flex flex-col justify-center relative overflow-hidden"
-            style={{ background: "linear-gradient(135deg, #dce6fb 0%, #eef0f8 60%)" }}
-          >
-            <div className="w-20 h-20 rounded-full overflow-hidden relative shrink-0 ring-4 ring-white/60 mb-4">
+          <div className="relative min-h-[320px] overflow-hidden" style={{ background: SOFT_PURPLE_BLOB }}>
+            <div className="absolute top-6 left-6 w-20 h-20 rounded-full overflow-hidden relative shrink-0 ring-4 ring-white shadow-[0_6px_18px_rgba(0,0,0,0.15)] z-10">
               <img
                 src="/images/profile-pic.png"
                 alt="Putri Wulandari"
                 className="object-cover w-full h-full absolute inset-0 z-10 bg-card"
               />
-              <div className="w-full h-full absolute inset-0 z-0 flex items-center justify-center bg-gradient-to-br from-accent to-violet text-white text-xl font-bold font-display">
+              <div className="w-full h-full absolute inset-0 z-0 flex items-center justify-center bg-violet text-white text-xl font-bold font-display">
                 PW
               </div>
             </div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="w-2 h-2 rounded-full bg-success shadow-[0_0_0_3px_rgba(34,201,129,.2)]" />
-              <span className="text-[11px] text-[#4a4f6a]">{t("about.available")}</span>
+
+            <div className="absolute bottom-6 left-6 right-6 z-10">
+              <h2 className="font-display text-[26px] font-extrabold text-ink tracking-tight leading-tight mb-1">
+                Putri Wulandari
+              </h2>
+              <p className="text-ink-2 text-[13px]">{t("about.headline")}</p>
+              <span className="mt-1.5 inline-flex items-center gap-1 px-2 py-1 rounded-pill bg-white/50 backdrop-blur-md border border-white/60 text-ink-3 text-[12px] font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-success" />
+                {t("about.available")}
+              </span>
             </div>
-            <h2 className="font-display text-[28px] font-extrabold text-[#0d0f1a] tracking-tight leading-tight mb-1">
-              Putri Wulandari
-            </h2>
-            <p className="text-[#9599b3] text-[13px]">{t("about.headline")}</p>
           </div>
 
           {/* Right: statement + CTAs */}
@@ -128,22 +132,25 @@ export default function AboutPage() {
                 rel="noopener noreferrer"
                 className="btn-primary text-[13px] py-2.5 px-5"
               >
-                {t("about.linkedin")} ↗
+                {t("about.linkedin")} <ArrowIcon size={13} />
               </a>
               <a href="mailto:ptr.wuln@gmail.com"
                 className="inline-flex items-center gap-2 font-medium cursor-pointer no-underline transition-all duration-200 px-5 py-2.5 rounded-pill text-[13px] text-ink-2 hover:text-ink border border-[var(--border)] hover:border-ink-2"
               >
                 {t("about.email")}
               </a>
-              <a
-                href="https://www.figma.com/proto/vzr3JyEeD2zLp4KWjwLzeL/CV-wulan?node-id=6938-37&t=l96CCQjtU1DG1ET7-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-medium cursor-pointer no-underline transition-all duration-200 px-5 py-2.5 rounded-pill text-[13px] text-ink-2 hover:text-ink border border-[var(--border)] hover:border-ink-2"
+              <button
+                type="button"
+                onClick={() => setCvModalOpen(true)}
+                className="inline-flex items-center gap-2 font-medium cursor-pointer no-underline transition-all duration-200 px-5 py-2.5 rounded-pill text-[13px] text-ink-2 hover:text-ink border border-[var(--border)] hover:border-ink-2 bg-transparent"
               >
                 {t("about.cv")}
-              </a>
+              </button>
+              <span className="inline-flex items-center gap-2 font-medium px-5 py-2.5 rounded-pill text-[13px] text-ink-2 border border-[var(--border)]">
+                📍 Jakarta, Indonesia
+              </span>
             </div>
+            <CvGateModal open={cvModalOpen} onClose={() => setCvModalOpen(false)} cvUrl="/cv-putri-wulandari.pdf" />
           </div>
         </div>
 
@@ -231,7 +238,7 @@ export default function AboutPage() {
             rel="noopener noreferrer"
             className="btn-primary"
           >
-            {t("about.linkedin")} ↗
+            {t("about.linkedin")} <ArrowIcon size={13} />
           </a>
         </div>
       </div>

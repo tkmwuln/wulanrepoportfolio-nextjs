@@ -6,6 +6,12 @@ import { useLang } from "../../context/LangContext";
 import { tr } from "../../../lib/content/translations";
 import { BLOG_ITEMS } from "../../../lib/content/blog-items";
 import { articleDetails } from "../../../lib/content";
+import { MESH_GRADIENTS } from "../../components/portfolio/MeshGradients";
+import ProjectIllustration from "../../components/portfolio/ProjectIllustration";
+import ArrowIcon from "../../components/ui/ArrowIcon";
+import ArrowLeftIcon from "../../components/ui/ArrowLeftIcon";
+import ArrowRightIcon from "../../components/ui/ArrowRightIcon";
+import ScrollToTopButton from "../../components/ui/ScrollToTopButton";
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
@@ -25,7 +31,7 @@ export default function BlogPostPage() {
       <div className="min-h-screen bg-page flex items-center justify-center">
         <div className="text-center">
           <h1 className="font-display text-4xl font-bold text-ink mb-4">{t("blog.not_found")}</h1>
-          <Link href="/blog" className="btn-primary">{t("blog.back")}</Link>
+          <Link href="/blog" className="btn-primary"><ArrowLeftIcon size={13} /> {t("blog.back")}</Link>
         </div>
       </div>
     );
@@ -39,8 +45,11 @@ export default function BlogPostPage() {
       {/* Hero */}
       <div
         className="w-full h-80 flex items-end relative overflow-hidden"
-        style={{ background: post.gradient }}
+        style={{ background: MESH_GRADIENTS[idx % MESH_GRADIENTS.length] }}
       >
+        <div className="absolute inset-0 w-1/2 h-full right-0 left-auto opacity-70">
+          <ProjectIllustration title={post.title} />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
         <div className="relative z-10 mx-auto w-full max-w-[860px] px-6 pb-10">
           <div className="flex flex-wrap gap-2 mb-4">
@@ -149,7 +158,7 @@ export default function BlogPostPage() {
                 rel="noopener noreferrer"
                 className="ml-auto btn-ghost text-[12px] py-2 px-4 shrink-0"
               >
-                {t("blog.follow")} ↗
+                {t("blog.follow")} <ArrowIcon size={12} />
               </a>
             </div>
           </div>
@@ -157,12 +166,13 @@ export default function BlogPostPage() {
 
         {/* Navigation */}
         <div className="flex justify-between mt-6 gap-4">
-          <Link href="/blog" className="btn-ghost">{t("blog.back")}</Link>
+          <Link href="/blog" className="btn-ghost"><ArrowLeftIcon size={13} /> {t("blog.back")}</Link>
           <Link href={`/blog/${next.slug}`} className="btn-primary">
-            {t("detail.next")}: {next.title} →
+            {t("detail.next")}: {next.title} <ArrowRightIcon size={13} />
           </Link>
         </div>
       </div>
+      <ScrollToTopButton />
     </div>
   );
 }

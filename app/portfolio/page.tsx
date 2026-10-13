@@ -5,7 +5,8 @@ import { useState } from "react";
 import { useLang } from "../context/LangContext";
 import { tr } from "../../lib/content/translations";
 import { PORTFOLIO_ITEMS } from "../../lib/content/portfolio-items";
-import ProjectIllustration, { PROJECT_COLORS } from "../components/portfolio/ProjectIllustration";
+import { MESH_GRADIENTS } from "../components/portfolio/MeshGradients";
+import ProjectIllustration from "../components/portfolio/ProjectIllustration";
 
 const CATEGORY_ORDER = ["All", "Govtech", "B2B SaaS", "Fintech", "Design System", "Blockchain", "E-Health", "Website"];
 
@@ -60,22 +61,22 @@ export default function PortfolioPage() {
               {/* Cover */}
               <div
                 className="h-48 w-full relative overflow-hidden p-5"
-                style={{ background: PROJECT_COLORS[index % PROJECT_COLORS.length] }}
+                style={{ background: MESH_GRADIENTS[index % MESH_GRADIENTS.length] }}
               >
-                <div className="absolute inset-0 w-2/3 h-full right-0 left-auto opacity-90">
+                <div className="absolute inset-0 w-1/2 h-full right-0 left-auto opacity-80">
                   <ProjectIllustration title={project.title} />
                 </div>
                 <div className="relative z-10 flex items-center gap-2">
-                  <span className="text-[10px] bg-ink/10 text-ink/70 px-2.5 py-1 rounded-pill font-semibold tracking-wider uppercase">
+                  <span className="text-[10px] bg-white/40 text-ink/70 px-2.5 py-1 rounded-pill font-semibold tracking-wider uppercase backdrop-blur-sm">
                     {tr(lang, project.category)}
                   </span>
                   {project.featured && (
-                    <span className="text-[10px] bg-ink text-white px-2.5 py-1 rounded-pill font-semibold tracking-wider uppercase">
+                    <span className="text-[10px] bg-ink/80 text-white px-2.5 py-1 rounded-pill font-semibold tracking-wider uppercase backdrop-blur-sm">
                       {t("portfolio.featured")}
                     </span>
                   )}
                 </div>
-                <div className="absolute bottom-5 left-5 font-display text-[15px] font-extrabold text-ink/80">
+                <div className="absolute bottom-5 left-5 font-display text-[15px] font-extrabold text-ink/85">
                   {project.metric}
                 </div>
               </div>

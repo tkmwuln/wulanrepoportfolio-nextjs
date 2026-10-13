@@ -1,3 +1,5 @@
+import ArrowIcon from "../ui/ArrowIcon";
+
 type MetricItem = {
   label: string;
   value: string;
@@ -53,7 +55,7 @@ export default function BentoMetrics({ metrics }: BentoMetricsProps) {
             </div>
 
             <div
-              className={`absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center text-sm ${
+              className={`absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center ${
                 isBlue
                   ? "bg-white/20 text-white ring-1 ring-white/25"
                   : isLight
@@ -61,7 +63,7 @@ export default function BentoMetrics({ metrics }: BentoMetricsProps) {
                     : "bg-white/15 text-white"
               }`}
             >
-              ↗
+              <ArrowIcon size={13} />
             </div>
           </div>
         );

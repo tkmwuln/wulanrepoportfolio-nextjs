@@ -10,6 +10,10 @@ export type PortfolioItem = {
   metric: string;
   gradient: string;
   featured: boolean;
+  liveUrl?: string;
+  conceptScreens?: { title: string; kind: "chat" | "dashboard" | "safety" | "reports"; gradient: string }[];
+  homeScreenshot?: string;
+  screenshots?: { src: string; label: string }[];
 };
 
 export const PORTFOLIO_ITEMS: PortfolioItem[] = [
@@ -129,5 +133,30 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     metric: "Live Experience",
     gradient: "linear-gradient(140deg, #6b0006 0%, #d11117 100%)",
     featured: true,
+  },
+  {
+    id: "s10",
+    title: "NutriChat AI — Clinical Nutrition Tracking Engine",
+    slug: "nutrichat-ai",
+    description: "A standalone AI nutrition engine spanning the full human lifecycle (infant to elderly), combining WhatsApp-based Vision AI food logging with clinical-grade safety rules for chronic conditions and drug-nutrient interactions.",
+    category: "AI / HealthTech",
+    tags: ["Product Strategy", "AI/PRD"],
+    clientName: "NutriChat AI",
+    projectYear: 2026,
+    metric: "Infant to Elderly",
+    gradient: "linear-gradient(140deg, #3d2c8d 0%, #a65cc9 100%)",
+    featured: true,
+    liveUrl: "https://mobile-beaver-69863735.figma.site",
+    homeScreenshot: "/images/nutrichat/home.png",
+    screenshots: [
+      { src: "/images/nutrichat/chat-home.png", label: "Chat home — life-stage selector" },
+      { src: "/images/nutrichat/chat-foodlog.png", label: "AI food photo logging" },
+      { src: "/images/nutrichat/dashboard-gizi.png", label: "Nutrition dashboard" },
+      { src: "/images/nutrichat/status-kesehatan.png", label: "Health & allergy profile" },
+      { src: "/images/nutrichat/growth-chart.png", label: "WHO growth chart" },
+      { src: "/images/nutrichat/food-diary.png", label: "Food diary" },
+      { src: "/images/nutrichat/laporan-kesehatan.png", label: "Clinical export report" },
+      { src: "/images/nutrichat/google-signin.png", label: "Google sign-in" },
+    ],
   },
 ];

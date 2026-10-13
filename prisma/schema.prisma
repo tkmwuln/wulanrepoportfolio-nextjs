@@ -99,3 +99,12 @@ model Contact {
 
   @@map("contacts")
 }
+
+model CvLead {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  createdAt DateTime @default(now())
+
+  @@map("cv_leads")
+}

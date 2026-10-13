@@ -2,18 +2,27 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useState } from "react";
 import { useLang } from "../../context/LangContext";
 import { tr } from "../../../lib/content/translations";
 import { PORTFOLIO_ITEMS } from "../../../lib/content/portfolio-items";
 import { projectDetails } from "../../../lib/content";
 import LenusaProjectDetail from "./LenusaProjectDetail";
-import ProjectIllustration, { PROJECT_COLORS } from "../../components/portfolio/ProjectIllustration";
+import { MESH_GRADIENTS } from "../../components/portfolio/MeshGradients";
+import ProjectIllustration from "../../components/portfolio/ProjectIllustration";
+import CvGateModal from "../../components/CvGateModal";
+import ArrowIcon from "../../components/ui/ArrowIcon";
+import ArrowLeftIcon from "../../components/ui/ArrowLeftIcon";
+import ArrowRightIcon from "../../components/ui/ArrowRightIcon";
+import ScrollToTopButton from "../../components/ui/ScrollToTopButton";
 
-const CV_URL = "https://drive.google.com/file/d/1TUy0n71AlVlbuL9dx5qte_1tGUB7EPVu/view";
+const CV_URL = "/cv-putri-wulandari.pdf";
 
 export default function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const { lang, t } = useLang();
+  const [cvModalOpen, setCvModalOpen] = useState(false);
+  const [previewMode, setPreviewMode] = useState<"desktop" | "mobile">("desktop");
 
   if (slug === "website-lenusa") {
     return <LenusaProjectDetail />;
@@ -27,7 +36,7 @@ export default function ProjectDetailPage() {
       <div className="min-h-screen bg-page flex items-center justify-center">
         <div className="text-center">
           <h1 className="font-display text-4xl font-bold text-ink mb-4">{t("detail.not_found")}</h1>
-          <Link href="/portfolio" className="btn-primary">{t("detail.back")}</Link>
+          <Link href="/portfolio" className="btn-primary"><ArrowLeftIcon size={13} /> {t("detail.back")}</Link>
         </div>
       </div>
     );
@@ -35,13 +44,13 @@ export default function ProjectDetailPage() {
 
   const idx = PORTFOLIO_ITEMS.findIndex((p) => p.slug === slug);
   const next = PORTFOLIO_ITEMS[(idx + 1) % PORTFOLIO_ITEMS.length];
-  const color = PROJECT_COLORS[idx % PROJECT_COLORS.length];
+  const color = MESH_GRADIENTS[idx % MESH_GRADIENTS.length];
 
   return (
     <div className="min-h-screen bg-page">
       <div className="mx-auto w-full max-w-[1280px] px-6 pt-10">
-        <Link href="/portfolio" className="text-accent text-sm font-semibold no-underline mb-6 inline-block">
-          {t("detail.back")}
+        <Link href="/portfolio" className="text-accent text-sm font-semibold no-underline mb-6 inline-flex items-center gap-1">
+          <ArrowLeftIcon size={13} /> {t("detail.back")}
         </Link>
 
         {/* Header */}
@@ -60,13 +69,105 @@ export default function ProjectDetailPage() {
           className="w-full h-[280px] rounded-[var(--r-lg)] relative overflow-hidden mb-6"
           style={{ background: color }}
         >
-          <div className="absolute inset-0 w-2/3 h-full right-0 left-auto opacity-90">
+          <div className="absolute inset-0 w-1/2 h-full right-0 left-auto opacity-80">
             <ProjectIllustration title={item.title} />
           </div>
-          <div className="absolute bottom-6 left-6 font-display text-[28px] font-extrabold text-ink/80">
+          <div className="absolute bottom-6 left-6 font-display text-[28px] font-extrabold text-ink/85">
             {item.metric}
           </div>
         </div>
+
+        {/* Live preview — desktop / mobile toggle */}
+        {item.liveUrl && (
+          <div className="mb-6">
+            <div className="flex gap-1 mb-3">
+              <button
+                type="button"
+                onClick={() => setPreviewMode("desktop")}
+                className={`px-4 py-1.5 rounded-pill text-[12px] font-semibold cursor-pointer border transition-colors ${
+                  previewMode === "desktop"
+                    ? "bg-ink text-[var(--card-bg)] border-ink"
+                    : "bg-transparent text-ink-2 border-[var(--border)] hover:border-ink-2"
+                }`}
+              >
+                Desktop
+              </button>
+              <button
+                type="button"
+                onClick={() => setPreviewMode("mobile")}
+                className={`px-4 py-1.5 rounded-pill text-[12px] font-semibold cursor-pointer border transition-colors ${
+                  previewMode === "mobile"
+                    ? "bg-ink text-[var(--card-bg)] border-ink"
+                    : "bg-transparent text-ink-2 border-[var(--border)] hover:border-ink-2"
+                }`}
+              >
+                Mobile
+              </button>
+            </div>
+
+            {previewMode === "desktop" ? (
+              <div className="rounded-[var(--r-lg)] overflow-hidden border border-[var(--border)] shadow-card-lg bg-[#1c1c22]">
+                <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[#2a2a33]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+                  <span className="ml-3 text-[11px] text-white/40 bg-white/5 rounded-full px-3 py-1 truncate">{item.liveUrl.replace(/^https?:\/\//, "")}</span>
+                </div>
+                <div className="relative w-full aspect-[16/10] bg-black">
+                  <iframe
+                    src={item.liveUrl}
+                    title={`${item.title} — desktop preview`}
+                    loading="lazy"
+                    className="w-full h-full border-0"
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="mx-auto w-[260px] rounded-[2rem] border-[6px] border-[#1c1c22] bg-[#1c1c22] shadow-card-lg overflow-hidden">
+                <div className="relative w-full aspect-[9/19.5] bg-black rounded-[1.4rem] overflow-hidden">
+                  <iframe
+                    src={item.liveUrl}
+                    title={`${item.title} — mobile preview`}
+                    loading="lazy"
+                    className="w-full h-full border-0"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* App preview — real screenshot of the live product's home screen */}
+        {item.homeScreenshot && (
+          <div className="mb-6">
+            <p className="label uppercase tracking-widest text-ink-3 mb-3">App Preview</p>
+            <div className="rounded-[var(--r-lg)] overflow-hidden border border-[var(--border)] shadow-card-lg bg-[#1c1c22]">
+              <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[#2a2a33]">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={item.homeScreenshot} alt={`${item.title} — home screen`} className="w-full h-auto block" />
+            </div>
+          </div>
+        )}
+
+        {/* Screenshot gallery — real captures of key app screens */}
+        {item.screenshots && (
+          <div className="mb-6">
+            <p className="label uppercase tracking-widest text-ink-3 mb-3">App Screens</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {item.screenshots.map((shot) => (
+                <div key={shot.src} className="rounded-[var(--r-lg)] overflow-hidden border border-[var(--border)] bg-card">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={shot.src} alt={shot.label} className="w-full h-auto block" />
+                  <p className="text-ink-2 text-[11px] font-medium px-3 py-2">{shot.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Body */}
@@ -246,7 +347,7 @@ export default function ProjectDetailPage() {
 
             {/* Metrics */}
             <div className="card p-6">
-              <h3 className="font-display text-base font-bold text-ink mb-4">{t("portfolio.eyebrow")}</h3>
+              <h3 className="font-display text-base font-bold text-ink mb-4">{t("detail.metrics")}</h3>
               <div className="grid grid-cols-2 gap-3">
                 {detail.metrics.map((m) => (
                   <div key={m.label.en}>
@@ -257,30 +358,31 @@ export default function ProjectDetailPage() {
               </div>
             </div>
 
-            <a
-              href={CV_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-pill font-semibold text-[13px] no-underline transition-all duration-200 border-2 border-accent text-accent hover:bg-accent hover:text-white"
+            <button
+              type="button"
+              onClick={() => setCvModalOpen(true)}
+              className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-pill font-semibold text-[13px] transition-all duration-200 border-2 border-accent text-accent hover:bg-accent hover:text-white cursor-pointer bg-transparent"
             >
               {t("about.cv")}
-            </a>
+            </button>
 
             <a
               href="https://www.linkedin.com/in/putriwulandari-ptrwuln/"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary w-full justify-center text-center block"
+              className="btn-ghost w-full justify-center text-center"
             >
-              {t("about.linkedin")}
+              {t("about.linkedin")} <ArrowIcon size={13} />
             </a>
 
-            <Link href={`/portfolio/${next.slug}`} className="btn-ghost w-full justify-center text-center block">
-              {t("detail.next")}: {next.title}
+            <Link href={`/portfolio/${next.slug}`} className="btn-ghost w-full justify-center text-center">
+              {t("detail.next")}: {next.title} <ArrowRightIcon size={13} />
             </Link>
           </div>
         </div>
       </div>
+      <CvGateModal open={cvModalOpen} onClose={() => setCvModalOpen(false)} cvUrl={CV_URL} />
+      <ScrollToTopButton />
     </div>
   );
 }

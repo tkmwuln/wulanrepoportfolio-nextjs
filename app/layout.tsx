@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Navbar from "./components/layout/Navbar";
+import Fairy from "./components/Fairy";
 import { ThemeProvider } from "./context/ThemeContext";
 import { LangProvider } from "./context/LangContext";
+import { displayFont, bodyFont } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,12 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className={`h-full antialiased ${displayFont.variable} ${bodyFont.variable}`}>
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
           <LangProvider>
             <Navbar />
             <main className="flex-1">{children}</main>
+            <Fairy />
           </LangProvider>
         </ThemeProvider>
       </body>

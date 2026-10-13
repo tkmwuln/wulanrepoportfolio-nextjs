@@ -11,10 +11,6 @@ const config: Config = {
   darkMode: "class",
   theme: {
     extend: {
-      fontFamily: {
-        display: ["Bricolage Grotesque", "sans-serif"],
-        sans: ["Plus Jakarta Sans", "sans-serif"],
-      },
       colors: {
         page: "#eef0f8",
         card: "#ffffff",
