@@ -154,8 +154,7 @@ export default function HeroSection({
 
       {/* ── Profile Card ── */}
       <div
-        className="rounded-[var(--r-lg)] p-6 flex flex-col justify-between relative overflow-hidden animate-fade-up delay-200"
-        style={{ background: "linear-gradient(140deg, #0d0f1a 0%, #1a1f42 100%)" }}
+        className="rounded-[var(--r-lg)] p-6 flex flex-col justify-between relative overflow-hidden animate-fade-up delay-200 bg-[linear-gradient(140deg,#0d0f1a_0%,#1a1f42_100%)] dark:bg-[linear-gradient(135deg,#dce6fb_0%,#eef0f8_100%)]"
       >
         <div
           className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full pointer-events-none"
@@ -164,7 +163,7 @@ export default function HeroSection({
 
         {/* Avatar row + available + location inline */}
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-11 h-11 rounded-full overflow-hidden relative ring-2 ring-white/10 shrink-0">
+          <div className="w-11 h-11 rounded-full overflow-hidden relative ring-2 ring-white/10 dark:ring-black/10 shrink-0">
             <img
               src={avatarUrl}
               alt="Putri Wulandari"
@@ -177,27 +176,27 @@ export default function HeroSection({
             {profile.openToWork && (
               <div className="flex items-center gap-1.5 mb-0.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-success shadow-[0_0_0_2px_rgba(34,201,129,.2)]" />
-                <span className="text-[10px] text-white/60">{t("profile.available")}</span>
+                <span className="text-[10px] text-white/60 dark:text-[#4a4f6a]">{t("profile.available")}</span>
               </div>
             )}
             {profile.location && (
-              <p className="text-[9px] text-white/30">📍 {profile.location}</p>
+              <p className="text-[9px] text-white/30 dark:text-[#9599b3]">📍 {profile.location}</p>
             )}
           </div>
         </div>
 
         {/* Name + headline */}
         <div className="mb-2">
-          <h2 className="font-display text-[18px] font-bold text-white leading-tight tracking-tight">Putri Wulandari</h2>
-          <p className="text-[11px] text-white/40 mt-0.5">{profile.headline ?? "AI Product Manager & Service Designer"}</p>
+          <h2 className="font-display text-[18px] font-bold text-white dark:text-[#0d0f1a] leading-tight tracking-tight">Putri Wulandari</h2>
+          <p className="text-[11px] text-white/40 dark:text-[#9599b3] mt-0.5">{profile.headline ?? "AI Product Manager & Service Designer"}</p>
         </div>
 
         {/* Expertise pills */}
         <div className="my-2">
-          <p className="text-[9px] font-semibold uppercase tracking-widest text-white/30 mb-1.5">Expertise</p>
+          <p className="text-[9px] font-semibold uppercase tracking-widest text-white/30 dark:text-[#9599b3] mb-1.5">Expertise</p>
           <div className="flex flex-wrap gap-1">
             {EXPERTISE.map(skill => (
-              <span key={skill} className="px-2 py-0.5 rounded-full text-[10px] font-semibold text-white/60 border border-white/10 bg-white/5">{skill}</span>
+              <span key={skill} className="px-2 py-0.5 rounded-full text-[10px] font-semibold text-white/60 dark:text-[#4a4f6a] border border-white/10 dark:border-black/10 bg-white/5 dark:bg-black/5">{skill}</span>
             ))}
           </div>
         </div>
@@ -208,9 +207,9 @@ export default function HeroSection({
             { num: `${yearsExperience}yr`, label: t("stat.exp") },
             { num: "4.9★", label: t("stat.rating") },
           ].map((s) => (
-            <div key={s.label} className="rounded-xl py-2 text-center" style={{ background: "rgba(255,255,255,.07)" }}>
-              <div className="font-display text-[18px] font-extrabold text-white leading-none">{s.num}</div>
-              <div className="text-[9px] text-white/30 mt-0.5 uppercase tracking-wider">{s.label}</div>
+            <div key={s.label} className="rounded-xl py-2 text-center bg-white/[.07] dark:bg-black/[.05]">
+              <div className="font-display text-[18px] font-extrabold text-white dark:text-[#0d0f1a] leading-none">{s.num}</div>
+              <div className="text-[9px] text-white/30 dark:text-[#9599b3] mt-0.5 uppercase tracking-wider">{s.label}</div>
             </div>
           ))}
         </div>
