@@ -40,7 +40,7 @@ export default function PortfolioPage() {
               onClick={() => setActiveCategory(cat)}
               className={`px-4 py-2 rounded-pill text-[12px] font-semibold tracking-wide transition-all duration-200 cursor-pointer border ${
                 activeCategory === cat
-                  ? "bg-ink text-white border-ink dark:bg-white dark:text-white dark:border-white"
+                  ? "bg-ink border-ink text-[var(--card-bg)]"
                   : "bg-transparent text-ink-2 border-[var(--border)] hover:border-ink-2 hover:text-ink"
               }`}
             >

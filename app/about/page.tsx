@@ -106,12 +106,12 @@ export default function AboutPage() {
             </div>
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2 h-2 rounded-full bg-success shadow-[0_0_0_3px_rgba(34,201,129,.2)]" />
-              <span className="text-[11px] text-ink-2">{t("about.available")}</span>
+              <span className="text-[11px] text-[#4a4f6a]">{t("about.available")}</span>
             </div>
-            <h2 className="font-display text-[28px] font-extrabold text-ink tracking-tight leading-tight mb-1">
+            <h2 className="font-display text-[28px] font-extrabold text-[#0d0f1a] tracking-tight leading-tight mb-1">
               Putri Wulandari
             </h2>
-            <p className="text-ink-3 text-[13px]">{t("about.headline")}</p>
+            <p className="text-[#9599b3] text-[13px]">{t("about.headline")}</p>
           </div>
 
           {/* Right: statement + CTAs */}

@@ -119,7 +119,7 @@ export default function AdminBlogPage() {
               onClick={() => setFilter(f.key)}
               className={`flex items-center gap-1.5 px-4 py-1.5 rounded-pill text-[12px] font-semibold transition-all border ${
                 filter === f.key
-                  ? 'bg-ink text-white border-ink dark:bg-white dark:text-white dark:border-white'
+                  ? 'bg-ink border-ink text-[var(--card-bg)]'
                   : 'bg-card2 text-ink-2 border-[var(--border)] hover:border-ink hover:text-ink'
               }`}
             >
