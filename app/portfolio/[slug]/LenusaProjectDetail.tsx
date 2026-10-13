@@ -1,8 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { useLang } from "../../context/LangContext";
 import { tr } from "../../../lib/content/translations";
+import ArrowLeftIcon from "../../components/ui/ArrowLeftIcon";
+import ArrowIcon from "../../components/ui/ArrowIcon";
+import ScrollToTopButton from "../../components/ui/ScrollToTopButton";
 
 const PROCESS = [
   {
@@ -50,40 +54,97 @@ const DELIVERABLES = [
 export default function LenusaProjectDetail() {
   const { lang, t } = useLang();
   const L = (s: string) => tr(lang, s);
+  const [previewMode, setPreviewMode] = useState<"desktop" | "mobile">("desktop");
 
   return (
     <div className="min-h-screen bg-page">
       {/* Hero */}
-      <div
-        className="w-full py-16 relative overflow-hidden"
-        style={{ background: "linear-gradient(140deg, #6b0006 0%, #d11117 100%)" }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-        <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6">
-          <Link href="/portfolio" className="text-white/70 text-sm font-semibold no-underline mb-6 inline-block">
-            {t("detail.back")}
-          </Link>
-          <div className="flex flex-wrap gap-2 mb-4">
-            <span className="text-[11px] bg-white/20 text-white/80 px-3 py-1 rounded-pill font-semibold tracking-wider uppercase backdrop-blur-sm">{L("Website")}</span>
-            <span className="text-[11px] bg-white/20 text-white/80 px-3 py-1 rounded-pill font-semibold tracking-wider uppercase backdrop-blur-sm">{L("Develop")}</span>
+      <div className="w-full py-10 md:py-16 bg-page">
+        <div className="mx-auto w-full max-w-[1280px] px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <Link href="/portfolio" className="text-accent text-sm font-semibold no-underline mb-6 inline-flex items-center gap-1">
+              <ArrowLeftIcon size={13} /> {t("detail.back")}
+            </Link>
+            <div className="flex flex-wrap gap-2 mb-4">
+              <span className="text-[11px] bg-card2 text-ink-2 border border-[var(--border)] px-3 py-1 rounded-pill font-semibold tracking-wider uppercase">{L("Website")}</span>
+              <span className="text-[11px] bg-card2 text-ink-2 border border-[var(--border)] px-3 py-1 rounded-pill font-semibold tracking-wider uppercase">{L("Develop")}</span>
+            </div>
+            <p className="text-ink-3 text-sm mb-2">{L("Featured project · 2025")}</p>
+            <h1 className="font-display text-[32px] md:text-[42px] font-extrabold text-ink tracking-tight leading-tight">
+              {lang === "id"
+                ? "Menghadirkan fine dining Indonesia ke Paris lewat website yang menggugah indra"
+                : "Bringing Indonesian fine dining to Paris through a sensorial website"}
+            </h1>
+            <p className="text-ink-2 max-w-xl mt-4 leading-relaxed text-sm">
+              {L("An immersive restaurant website for Le Nusa Paris, where Indonesia's culinary heritage, cultural artistry, and a seamless reservation journey meet.")}
+            </p>
+            <a
+              href="https://wulanrepowesite.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-pill bg-ink text-[var(--card-bg)] font-semibold text-[13px] no-underline"
+            >
+              {L("Visit live website")} <ArrowIcon size={13} />
+            </a>
           </div>
-          <p className="text-white/60 text-sm mb-2">{L("Featured project · 2025")}</p>
-          <h1 className="font-display text-[36px] md:text-[42px] font-extrabold text-white tracking-tight leading-tight max-w-2xl">
-            {lang === "id"
-              ? "Menghadirkan fine dining Indonesia ke Paris lewat website yang menggugah indra"
-              : "Bringing Indonesian fine dining to Paris through a sensorial website"}
-          </h1>
-          <p className="text-white/70 max-w-xl mt-4 leading-relaxed text-sm">
-            {L("An immersive restaurant website for Le Nusa Paris, where Indonesia's culinary heritage, cultural artistry, and a seamless reservation journey meet.")}
-          </p>
-          <a
-            href="https://wulanrepowesite.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-pill bg-white text-ink font-semibold text-[13px] no-underline"
-          >
-            {L("Visit live website")} ↗
-          </a>
+
+          {/* Live website preview, toggle between desktop and mobile viewport */}
+          <div>
+            <div className="flex gap-1 mb-3">
+              <button
+                type="button"
+                onClick={() => setPreviewMode("desktop")}
+                className={`px-4 py-1.5 rounded-pill text-[12px] font-semibold cursor-pointer border transition-colors ${
+                  previewMode === "desktop"
+                    ? "bg-ink text-[var(--card-bg)] border-ink"
+                    : "bg-transparent text-ink-2 border-[var(--border)] hover:border-ink-2"
+                }`}
+              >
+                {L("Desktop")}
+              </button>
+              <button
+                type="button"
+                onClick={() => setPreviewMode("mobile")}
+                className={`px-4 py-1.5 rounded-pill text-[12px] font-semibold cursor-pointer border transition-colors ${
+                  previewMode === "mobile"
+                    ? "bg-ink text-[var(--card-bg)] border-ink"
+                    : "bg-transparent text-ink-2 border-[var(--border)] hover:border-ink-2"
+                }`}
+              >
+                {L("Mobile")}
+              </button>
+            </div>
+
+            {previewMode === "desktop" ? (
+              <div className="rounded-[var(--r-lg)] overflow-hidden border border-[var(--border)] shadow-card-lg bg-[#1c1c22]">
+                <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[#2a2a33]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+                  <span className="ml-3 text-[11px] text-white/40 bg-white/5 rounded-full px-3 py-1 truncate">wulanrepowesite.vercel.app</span>
+                </div>
+                <div className="relative w-full aspect-[16/10] bg-black">
+                  <iframe
+                    src="https://wulanrepowesite.vercel.app/"
+                    title="Le Nusa Paris live website — desktop"
+                    loading="lazy"
+                    className="w-full h-full border-0"
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="mx-auto w-[260px] rounded-[2rem] border-[6px] border-[#1c1c22] bg-[#1c1c22] shadow-card-lg overflow-hidden">
+                <div className="relative w-full aspect-[9/19.5] bg-black rounded-[1.4rem] overflow-hidden">
+                  <iframe
+                    src="https://wulanrepowesite.vercel.app/"
+                    title="Le Nusa Paris live website — mobile"
+                    loading="lazy"
+                    className="w-full h-full border-0"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -189,7 +250,7 @@ export default function LenusaProjectDetail() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-pill bg-white text-ink font-semibold text-[13px] no-underline"
             >
-              {L("Visit live website")} ↗
+              {L("Visit live website")} <ArrowIcon size={13} />
             </a>
             <a
               href="https://www.linkedin.com/in/putriwulandari-ptrwuln/"
@@ -206,6 +267,7 @@ export default function LenusaProjectDetail() {
           {L("Next: Explore all projects")}
         </Link>
       </div>
+      <ScrollToTopButton />
     </div>
   );
 }

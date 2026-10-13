@@ -2,7 +2,8 @@ import { createClient } from '@/utils/supabase/server'
 import { cookies } from 'next/headers'
 import BentoMetrics, { defaultMetrics } from './components/sections/BentoMetrics'
 import HeroSection from './components/sections/HeroSection'
-import HomeProjectsSection, { HOME_PROJECTS } from './components/sections/HomeProjectsSection'
+import HomeProjectsSection from './components/sections/HomeProjectsSection'
+import { PORTFOLIO_ITEMS } from '../lib/content/portfolio-items'
 
 export default async function HomePage() {
   const cookieStore = await cookies()
@@ -26,7 +27,7 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen bg-page">
       <div className="mx-auto w-full max-w-[1280px] px-6 py-8 space-y-3">
-        <HeroSection profile={profile} projectCount={HOME_PROJECTS.length} />
+        <HeroSection profile={profile} projectCount={PORTFOLIO_ITEMS.length} />
         <BentoMetrics metrics={defaultMetrics} />
         <HomeProjectsSection />
       </div>

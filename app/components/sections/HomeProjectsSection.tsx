@@ -96,6 +96,19 @@ export const HOME_PROJECTS = [
     published: true,
     gradient: "linear-gradient(140deg, #6b0006 0%, #d11117 100%)", // Deep Red
   },
+  {
+    id: "s8",
+    title: "NutriChat AI — Clinical Nutrition Tracking Engine",
+    slug: "nutrichat-ai",
+    description: "A standalone AI nutrition engine spanning the full human lifecycle, combining WhatsApp-based Vision AI food logging with clinical-grade safety rules.",
+    image: null,
+    category: "AI / HealthTech",
+    clientName: "NutriChat AI",
+    projectYear: 2026,
+    metricValue: null,
+    published: true,
+    gradient: "linear-gradient(140deg, #3d2c8d 0%, #a65cc9 100%)", // Violet to Orchid
+  },
 ];
 
 type Project = {
@@ -131,7 +144,7 @@ export default function HomeProjectsSection({ projects }: { projects?: Project[]
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {display.slice(0, 7).map((project, index) => (
+        {display.slice(0, 8).map((project, index) => (
           <ProjectCard
             key={project.id}
             title={project.title}

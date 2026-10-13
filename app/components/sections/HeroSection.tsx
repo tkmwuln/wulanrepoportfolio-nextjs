@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { useLang } from "../../context/LangContext";
 import { useState, useEffect } from "react";
+import CvGateModal from "../CvGateModal";
+import ArrowIcon from "../ui/ArrowIcon";
+import { SOFT_PURPLE_BLOB } from "../../../lib/gradients";
 
 function CountUp({ value, duration = 1500 }: { value: number, duration?: number }) {
   const [count, setCount] = useState(0);
@@ -60,10 +63,10 @@ const defaultIndustries = [
 ];
 
 const COLLABORATORS = ["Gojek", "Tokopedia", "Kemenkes RI", "LKPP", "Telkom", "BNI", "Prudential"];
-const EXPERTISE = ["UX Research", "PRD", "Figma", "OKR", "A/B Test", "Design Sys.", "Roadmap", "SQL"];
+const EXPERTISE = ["UX Research", "PRD", "Figma", "OKR", "A/B Test", "Service Design", "Design Sys.", "Roadmap", "SQL"];
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/putriwulandari-ptrwuln/";
-const CV_URL = "https://drive.google.com/file/d/1TUy0n71AlVlbuL9dx5qte_1tGUB7EPVu/view";
+const CV_URL = "/cv-putri-wulandari.pdf";
 const AVATAR_URL = "/images/profile-pic.png";
 
 function LinkedInIcon({ size = 15 }: { size?: number }) {
@@ -82,8 +85,10 @@ export default function HeroSection({
 }: HeroSectionProps) {
   const { t } = useLang();
   const avatarUrl = profile.avatarUrl || AVATAR_URL;
+  const [cvModalOpen, setCvModalOpen] = useState(false);
 
   return (
+    <>
     <div className="bento bento-hero animate-fade-up">
       {/* ── Main Hero Card ── */}
       <div className="card-lg p-10 flex flex-col justify-between relative overflow-hidden">
@@ -107,8 +112,8 @@ export default function HeroSection({
         </div>
 
         <div className="flex gap-3 flex-wrap items-center">
-          <Link href="/portfolio" className="btn-primary">{t("hero.cta_primary")}</Link>
-          <a href={CV_URL} target="_blank" rel="noopener noreferrer" className="btn-ghost">{t("hero.cta_secondary")}</a>
+          <Link href="/portfolio" className="btn-primary">{t("hero.cta_primary")} <ArrowIcon size={13} /></Link>
+          <button type="button" onClick={() => setCvModalOpen(true)} className="btn-ghost">{t("hero.cta_secondary")}</button>
           <a
             href={LINKEDIN_URL}
             target="_blank"
@@ -118,6 +123,9 @@ export default function HeroSection({
           >
             <LinkedInIcon size={15} />
           </a>
+          {profile.location && (
+            <span className="btn-ghost cursor-default">📍 {profile.location}</span>
+          )}
         </div>
       </div>
 
@@ -138,82 +146,94 @@ export default function HeroSection({
           <p className="label uppercase tracking-widest text-ink-3 mb-2 text-[10px]">Collaborated With</p>
           <div className="flex flex-wrap gap-1">
             {COLLABORATORS.map(c => (
-              <span key={c} className="px-2 py-0.5 rounded-full text-[10px] font-semibold text-ink-2 border border-[var(--border)] bg-card2">{c}</span>
+              <span key={c} className="pill text-ink-3 border border-[var(--border)] bg-card2">{c}</span>
             ))}
           </div>
         </div>
 
         {/* Count */}
         <div>
-          <div className="font-display text-[48px] font-extrabold tracking-tighter leading-none text-ink">
-            <CountUp value={projectCount} /><span className="text-[24px] text-ink-3">+</span>
+          <div className="flex items-baseline gap-2">
+            <div className="font-display text-[48px] font-extrabold tracking-tighter leading-none text-ink">
+              <CountUp value={projectCount} /><span className="text-[24px] text-ink-3">+</span>
+            </div>
+            <span className="text-ink-2 text-sm font-medium">Projects</span>
           </div>
           <p className="text-xs text-ink-3 mt-1">{t("products.sub")}</p>
         </div>
       </div>
 
-      {/* ── Profile Card ── */}
-      <div
-        className="rounded-[var(--r-lg)] p-6 flex flex-col justify-between relative overflow-hidden animate-fade-up delay-200 bg-[linear-gradient(140deg,#0d0f1a_0%,#1a1f42_100%)] dark:bg-[linear-gradient(135deg,#dce6fb_0%,#eef0f8_100%)]"
-      >
-        <div
-          className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(61,90,241,.35) 0%, transparent 70%)" }}
-        />
+      {/* ── Profile Card (stacked photo-hero style) ── */}
+      <div className="relative h-full animate-fade-up delay-200">
+        {/* offset background layer for the stacked-card depth effect */}
+        <div className="absolute inset-x-3 top-3 -bottom-2 rounded-[var(--r-lg)] bg-card2" />
 
-        {/* Avatar row + available + location inline */}
-        <div className="flex items-center gap-3 mb-3">
-          <div className="w-11 h-11 rounded-full overflow-hidden relative ring-2 ring-white/10 dark:ring-black/10 shrink-0">
-            <img
-              src={avatarUrl}
-              alt="Putri Wulandari"
-              className="object-cover w-full h-full absolute inset-0 z-10 bg-card"
-              onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-            />
-            <div className="w-full h-full absolute inset-0 z-0 flex items-center justify-center bg-gradient-to-br from-accent to-violet text-white text-sm font-bold">PW</div>
+        <div className="relative h-full rounded-[var(--r-lg)] bg-card shadow-card p-4 flex flex-col">
+          {/* Top row: greeting, arrow link */}
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <p className="label uppercase tracking-widest text-ink-3 truncate">Hi, nice to meet you! 👋</p>
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="LinkedIn"
+              className="w-6 h-6 rounded-full bg-card2 flex items-center justify-center text-ink-2 hover:bg-ink hover:text-white transition-colors duration-200 shrink-0"
+            >
+              <ArrowIcon size={11} />
+            </a>
           </div>
-          <div className="min-w-0">
-            {profile.openToWork && (
-              <div className="flex items-center gap-1.5 mb-0.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-success shadow-[0_0_0_2px_rgba(34,201,129,.2)]" />
-                <span className="text-[10px] text-white/60 dark:text-[#4a4f6a]">{t("profile.available")}</span>
+
+          {/* Hero visual — soft purple gradient with a small round avatar */}
+          <div className="relative flex-1 min-h-[230px] rounded-[20px] overflow-hidden" style={{ background: SOFT_PURPLE_BLOB }}>
+            <Link href="/about" className="absolute top-5 left-5 w-20 h-20 rounded-full overflow-hidden ring-4 ring-white shadow-[0_6px_18px_rgba(0,0,0,0.15)] z-10 block">
+              <img
+                src={avatarUrl}
+                alt="Putri Wulandari"
+                className="object-cover w-full h-full absolute inset-0 z-10"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+              />
+              <div className="w-full h-full absolute inset-0 z-0 flex items-center justify-center bg-violet text-white text-lg font-bold">PW</div>
+            </Link>
+
+            {/* Floating stat badges — glassmorphic */}
+            <div className="absolute top-3 right-3 z-20 flex flex-col gap-2">
+              <div className="w-16 h-16 rounded-full flex flex-col items-center justify-center leading-tight text-center bg-white/50 backdrop-blur-md border border-white/60">
+                <span className="label uppercase tracking-widest text-violet text-[10px]">{yearsExperience}<br />years</span>
               </div>
-            )}
-            {profile.location && (
-              <p className="text-[9px] text-white/30 dark:text-[#9599b3]">📍 {profile.location}</p>
-            )}
+              <a
+                href={`${LINKEDIN_URL}details/recommendations/`}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="See LinkedIn recommendations"
+                className="w-16 h-16 rounded-full flex flex-col items-center justify-center leading-none bg-white/50 backdrop-blur-md border border-white/60 hover:bg-white/70 transition-colors duration-200"
+              >
+                <span className="label uppercase tracking-widest text-violet">4.9★</span>
+              </a>
+            </div>
+
+            {/* Bottom caption — directly on the gradient */}
+            <div className="absolute bottom-4 left-5 right-5 z-20">
+              <p className="font-display font-bold text-[16px] text-ink leading-tight truncate">Putri Wulandari</p>
+              <p className="text-ink-2 text-[12px] leading-tight truncate">{profile.headline ?? "AI Product Manager & Service Designer"}</p>
+              {profile.openToWork && (
+                <span className="mt-1.5 inline-flex items-center gap-1 px-2 py-1 rounded-pill bg-white/50 backdrop-blur-md border border-white/60 text-ink-3 text-[12px] font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-success" />
+                  {t("profile.available")}
+                </span>
+              )}
+            </div>
           </div>
-        </div>
 
-        {/* Name + headline */}
-        <div className="mb-2">
-          <h2 className="font-display text-[18px] font-bold text-white dark:text-[#0d0f1a] leading-tight tracking-tight">Putri Wulandari</h2>
-          <p className="text-[11px] text-white/40 dark:text-[#9599b3] mt-0.5">{profile.headline ?? "AI Product Manager & Service Designer"}</p>
-        </div>
-
-        {/* Expertise pills */}
-        <div className="my-2">
-          <p className="text-[9px] font-semibold uppercase tracking-widest text-white/30 dark:text-[#9599b3] mb-1.5">Expertise</p>
-          <div className="flex flex-wrap gap-1">
-            {EXPERTISE.map(skill => (
-              <span key={skill} className="px-2 py-0.5 rounded-full text-[10px] font-semibold text-white/60 dark:text-[#4a4f6a] border border-white/10 dark:border-black/10 bg-white/5 dark:bg-black/5">{skill}</span>
+          {/* Expertise pills */}
+          <div className="flex flex-wrap gap-1 mt-3">
+            {EXPERTISE.slice(0, 6).map(skill => (
+              <span key={skill} className="pill text-ink-3 border border-[var(--border)] bg-card2">{skill}</span>
             ))}
           </div>
         </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-2 gap-1.5">
-          {[
-            { num: `${yearsExperience}yr`, label: t("stat.exp") },
-            { num: "4.9★", label: t("stat.rating") },
-          ].map((s) => (
-            <div key={s.label} className="rounded-xl py-2 text-center bg-white/[.07] dark:bg-black/[.05]">
-              <div className="font-display text-[18px] font-extrabold text-white dark:text-[#0d0f1a] leading-none">{s.num}</div>
-              <div className="text-[9px] text-white/30 dark:text-[#9599b3] mt-0.5 uppercase tracking-wider">{s.label}</div>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
+    <CvGateModal open={cvModalOpen} onClose={() => setCvModalOpen(false)} cvUrl={CV_URL} />
+    </>
   );
 }

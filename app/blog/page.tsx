@@ -5,6 +5,9 @@ import { useState } from "react";
 import { useLang } from "../context/LangContext";
 import { tr } from "../../lib/content/translations";
 import { BLOG_ITEMS } from "../../lib/content/blog-items";
+import { MESH_GRADIENTS } from "../components/portfolio/MeshGradients";
+import ProjectIllustration from "../components/portfolio/ProjectIllustration";
+import ArrowIcon from "../components/ui/ArrowIcon";
 
 const ALL_CATS = ["All", "UX Design", "Service Design", "Product Strategy", "Case Study", "Design Tools", "UX Research"];
 
@@ -62,15 +65,11 @@ export default function BlogPage() {
           >
             <div className="card overflow-hidden hover:-translate-y-1 transition-transform duration-300 grid grid-cols-1 md:grid-cols-2">
               <div
-                className="h-56 md:h-auto w-full relative overflow-hidden flex items-center justify-center"
-                style={{ background: BLOG_ITEMS[0].gradient }}
+                className="h-56 md:h-auto w-full relative overflow-hidden"
+                style={{ background: MESH_GRADIENTS[0] }}
               >
-                <div className="relative w-28 h-28">
-                  <span className="absolute inset-0 rounded-full border border-white/25" />
-                  <span className="absolute inset-4 rounded-full border border-white/15" />
-                  <span className="absolute inset-0 m-auto w-5 h-5 rounded-full bg-white" />
-                  <span className="absolute top-0 left-1/2 w-2 h-2 rounded-full bg-white/70" />
-                  <span className="absolute bottom-2 right-2 w-1.5 h-1.5 rounded-full bg-white/50" />
+                <div className="absolute inset-0 w-2/3 h-full right-0 left-auto opacity-80">
+                  <ProjectIllustration title={BLOG_ITEMS[0].title} />
                 </div>
               </div>
               <div className="p-7 flex flex-col justify-center">
@@ -89,8 +88,8 @@ export default function BlogPage() {
                   {BLOG_ITEMS[0].title}
                 </h2>
                 <p className="text-ink-2 text-sm leading-relaxed">{BLOG_ITEMS[0].excerpt}</p>
-                <div className="mt-4 text-accent text-[13px] font-semibold">
-                  {t("blog.read_article")} →
+                <div className="mt-4 text-accent text-[13px] font-semibold inline-flex items-center gap-1.5">
+                  {t("blog.read_article")} <ArrowIcon size={12} />
                 </div>
               </div>
             </div>
@@ -99,7 +98,9 @@ export default function BlogPage() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {(activeCategory === "All" ? filtered.slice(1) : filtered).map((post) => (
+          {(activeCategory === "All" ? filtered.slice(1) : filtered).map((post) => {
+            const gradientIdx = BLOG_ITEMS.findIndex((p) => p.id === post.id);
+            return (
             <Link
               key={post.id}
               href={`/blog/${post.slug}`}
@@ -107,12 +108,14 @@ export default function BlogPage() {
             >
               {/* Gradient cover */}
               <div
-                className="h-32 w-full relative"
-                style={{ background: post.gradient }}
+                className="h-32 w-full relative overflow-hidden"
+                style={{ background: MESH_GRADIENTS[gradientIdx % MESH_GRADIENTS.length] }}
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                <div className="absolute bottom-3 left-4">
-                  <span className="text-[10px] bg-white/25 text-white/90 px-2.5 py-1 rounded-pill font-semibold tracking-wider uppercase backdrop-blur-sm">
+                <div className="absolute inset-0 w-1/2 h-full right-0 left-auto opacity-80">
+                  <ProjectIllustration title={post.title} />
+                </div>
+                <div className="absolute bottom-3 left-4 z-10">
+                  <span className="text-[10px] bg-white/40 text-ink/70 px-2.5 py-1 rounded-pill font-semibold tracking-wider uppercase backdrop-blur-sm">
                     {tr(lang, post.category)}
                   </span>
                 </div>
@@ -140,7 +143,8 @@ export default function BlogPage() {
                 </div>
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
 
         {/* Subscribe CTA */}
@@ -154,7 +158,7 @@ export default function BlogPage() {
             rel="noopener noreferrer"
             className="btn-primary"
           >
-            {t("blog.follow")} ↗
+            {t("blog.follow")} <ArrowIcon size={13} />
           </a>
         </div>
       </div>

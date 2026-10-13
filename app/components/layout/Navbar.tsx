@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { useLang } from "../../context/LangContext";
+import ArrowIcon from "../ui/ArrowIcon";
 
 const NAV_KEYS = [
   { key: "nav.home", href: "/" },
@@ -55,10 +56,16 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className="font-display font-extrabold text-[17px] tracking-tight text-ink no-underline flex items-baseline gap-0.5"
+          className="font-display font-extrabold text-[17px] tracking-tight text-ink no-underline flex items-center gap-2"
           style={{ letterSpacing: "-0.03em" }}
         >
-          Putri Wulandari<span className="text-accent">.</span>
+          <span
+            className="w-6 h-6 rounded-full shrink-0"
+            style={{ background: "linear-gradient(135deg, #e0d4fb, #b79cf0)" }}
+          />
+          <span className="flex items-baseline gap-0.5">
+            Putri Wulandari<span className="text-accent">.</span>
+          </span>
         </Link>
 
         {/* Desktop Nav links */}
@@ -118,7 +125,7 @@ export default function Navbar() {
 
           {/* Open to work badge – desktop only */}
           {openToWork && (
-            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-[10px] bg-success/10 border border-success/20 ml-1">
+            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-pill bg-success/10 border border-success/20 ml-1">
               <span className="w-1.5 h-1.5 rounded-full bg-success shadow-[0_0_0_2px_rgba(34,201,129,.2)]"></span>
               <span className="text-[10px] font-semibold text-success uppercase tracking-wide">Open to work</span>
             </div>
@@ -131,7 +138,7 @@ export default function Navbar() {
             rel="noopener noreferrer"
             className="btn-primary text-[13px] py-2.5 px-5 hidden sm:inline-flex"
           >
-            {t("nav.lets_talk")}
+            {t("nav.lets_talk")} <ArrowIcon size={13} />
           </a>
 
           {/* Mobile hamburger */}
@@ -176,7 +183,7 @@ export default function Navbar() {
                 <span className={lang === "id" ? "text-ink" : "text-ink-3"}>ID</span>
               </button>
               <a href="https://www.linkedin.com/in/putriwulandari-ptrwuln/" target="_blank" rel="noopener noreferrer" className="btn-primary w-full text-center justify-center text-[13px] py-3">
-                {t("nav.lets_talk")}
+                {t("nav.lets_talk")} <ArrowIcon size={13} />
               </a>
               {openToWork && (
                 <div className="nav-available justify-center">{t("nav.open_to_work")}</div>

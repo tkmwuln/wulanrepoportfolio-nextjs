@@ -17,11 +17,13 @@ type IllustrationKind =
   | "identity"
   | "blockchain"
   | "emr"
-  | "resto";
+  | "resto"
+  | "nutrition";
 
 function illustrationKind(title: string): IllustrationKind {
   const t = title.toLowerCase();
   if (t.includes("le nusa")) return "resto";
+  if (t.includes("nutri")) return "nutrition";
   if (t.includes("emr") || t.includes("vaccination")) return "emr";
   if (t.includes("e-health") || t.includes("simrs")) return "health";
   if (t.includes("cx")) return "cx";
@@ -147,6 +149,16 @@ export default function ProjectIllustration({ title }: { title: string }) {
           <rect x="37" y="36" width="5" height="26" rx="2.5" fill={k} />
           <path d="M170 36c-10 10-10 30 0 38z" fill={k} />
           <rect x="167" y="36" width="6" height="80" rx="3" fill={k} />
+        </>
+      )}
+      {kind === "nutrition" && (
+        <>
+          <circle cx="100" cy="70" r="58" fill={m} />
+          <rect x="56" y="26" width="88" height="88" rx="22" fill={w} />
+          <path d="M68 74a32 16 0 1064 0z" fill={k} />
+          <rect x="66" y="70" width="68" height="8" rx="4" fill={d} />
+          <path d="M126 44l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill={k} />
+          <circle cx="72" cy="46" r="5" fill={d} />
         </>
       )}
     </svg>

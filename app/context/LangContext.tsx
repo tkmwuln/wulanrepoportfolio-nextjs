@@ -18,7 +18,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.about": "About",
     "nav.blog": "Blog",
     "nav.open_to_work": "Open to work",
-    "nav.lets_talk": "Let's Talk ↗",
+    "nav.lets_talk": "Let's Talk",
 
     // Hero
     "hero.label": "Senior PM & UX Manager · Portfolio",
@@ -27,11 +27,11 @@ const translations: Record<Lang, Record<string, string>> = {
     "hero.title2": "into elegant products",
     "hero.bio":
       "Building digital experiences that balance deep user empathy with measurable business outcomes — from research to shipped product.",
-    "hero.cta_primary": "View Case Studies ↗",
+    "hero.cta_primary": "View Case Studies",
     "hero.cta_secondary": "Download CV",
 
     // Profile card
-    "profile.available": "Available now",
+    "profile.available": "Available new opportunities",
 
     // Products card
     "products.label": "Products Shipped",
@@ -67,7 +67,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "portfolio.featured": "Featured",
 
     // Portfolio detail page
-    "detail.back": "← Back to portfolio",
+    "detail.back": "Back to portfolio",
     "detail.company": "Company",
     "detail.role": "Role",
     "detail.duration": "Duration",
@@ -81,6 +81,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "detail.approach": "Approach",
     "detail.decisions": "Key design decisions",
     "detail.outcomes": "Outcomes",
+    "detail.metrics": "Key Metrics",
     "detail.learnings": "What I learned",
     "detail.tools": "Tools",
     "detail.next": "Next",
@@ -90,7 +91,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "about.eyebrow": "About",
     "about.my": "My",
     "about.profile": "Profile",
-    "about.available": "Available for new opportunities",
+    "about.available": "Available new opportunities",
     "about.headline": "AI Product Manager · Service Designer · UX Lead",
     "about.statement_a": "I'm a digital Product Manager and Service Designer. I love using ",
     "about.statement_b": "cognitive psychology",
@@ -120,7 +121,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "blog.subscribe_title": "New ideas, shared thoughtfully.",
     "blog.subscribe_text": "Follow on LinkedIn for new articles and product insights.",
     "blog.follow": "Follow on LinkedIn",
-    "blog.back": "← Back to blog",
+    "blog.back": "Back to blog",
     "blog.in_article": "In this article",
     "blog.takeaways": "Key takeaways",
     "blog.not_found": "Article not found",
@@ -132,7 +133,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "nav.about": "Tentang",
     "nav.blog": "Blog",
     "nav.open_to_work": "Buka untuk kerja",
-    "nav.lets_talk": "Mari Bicara ↗",
+    "nav.lets_talk": "Mari Bicara",
 
     // Hero
     "hero.label": "Senior PM & Manajer UX · Portofolio",
@@ -141,11 +142,11 @@ const translations: Record<Lang, Record<string, string>> = {
     "hero.title2": "menjadi produk elegan",
     "hero.bio":
       "Membangun pengalaman digital yang menyeimbangkan empati mendalam terhadap pengguna dengan hasil bisnis yang terukur — dari riset hingga produk yang diluncurkan.",
-    "hero.cta_primary": "Lihat Studi Kasus ↗",
+    "hero.cta_primary": "Lihat Studi Kasus",
     "hero.cta_secondary": "Unduh CV",
 
     // Profile card
-    "profile.available": "Tersedia sekarang",
+    "profile.available": "Terbuka untuk peluang baru",
 
     // Products card
     "products.label": "Produk Diluncurkan",
@@ -181,7 +182,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "portfolio.featured": "Pilihan",
 
     // Portfolio detail page
-    "detail.back": "← Kembali ke portofolio",
+    "detail.back": "Kembali ke portofolio",
     "detail.company": "Perusahaan",
     "detail.role": "Peran",
     "detail.duration": "Durasi",
@@ -195,6 +196,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "detail.approach": "Pendekatan",
     "detail.decisions": "Keputusan desain utama",
     "detail.outcomes": "Hasil",
+    "detail.metrics": "Metrik Utama",
     "detail.learnings": "Pelajaran",
     "detail.tools": "Alat",
     "detail.next": "Berikutnya",
@@ -234,7 +236,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "blog.subscribe_title": "Ide baru, dibagikan dengan penuh pertimbangan.",
     "blog.subscribe_text": "Ikuti LinkedIn untuk artikel dan wawasan produk terbaru.",
     "blog.follow": "Ikuti di LinkedIn",
-    "blog.back": "← Kembali ke blog",
+    "blog.back": "Kembali ke blog",
     "blog.in_article": "Di artikel ini",
     "blog.takeaways": "Poin penting",
     "blog.not_found": "Artikel tidak ditemukan",

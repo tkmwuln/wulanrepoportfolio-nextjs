@@ -1,5 +1,6 @@
 import Link from "next/link";
-import ProjectIllustration, { PROJECT_COLORS } from "./ProjectIllustration";
+import { MESH_GRADIENTS } from "./MeshGradients";
+import ProjectIllustration from "./ProjectIllustration";
 
 type Metric = {
   metricLabel: string;
@@ -30,7 +31,7 @@ export default function ProjectCard({
   metrics = [],
   index = 0,
 }: ProjectCardProps) {
-  const bg = PROJECT_COLORS[index % PROJECT_COLORS.length];
+  const bg = MESH_GRADIENTS[index % MESH_GRADIENTS.length];
 
   return (
     <Link
@@ -38,25 +39,25 @@ export default function ProjectCard({
       className="group relative rounded-card overflow-hidden shadow-card block no-underline"
       style={{ height: "220px", background: bg }}
     >
-      <div className="absolute inset-0 w-2/3 h-full right-0 left-auto opacity-90 transition-transform duration-500 group-hover:scale-105">
+      <div className="absolute inset-0 w-1/2 h-full right-0 left-auto opacity-80 transition-transform duration-500 group-hover:scale-105">
         <ProjectIllustration title={title} />
       </div>
 
-      <div className="absolute top-3.5 left-4 text-[11px] text-ink/50 bg-ink/10 rounded-pill px-2.5 py-1 font-semibold">
+      <div className="absolute top-3.5 left-4 text-[11px] text-ink/50 bg-white/40 backdrop-blur-sm rounded-pill px-2.5 py-1 font-semibold">
         {String(index + 1).padStart(2, "0")}
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 p-5">
+      <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/35 via-black/5 to-transparent">
         {category && (
-          <p className="text-[10px] uppercase tracking-[.08em] font-semibold text-ink/60 mb-1">
+          <p className="text-[10px] uppercase tracking-[.08em] font-semibold text-white/80 mb-1">
             {category.name}
           </p>
         )}
-        <h3 className="font-display text-[17px] font-bold text-ink leading-tight tracking-tight">
+        <h3 className="font-display text-[17px] font-bold text-white leading-tight tracking-tight">
           {title}
         </h3>
         {metrics[0] && (
-          <p className="text-[11px] text-ink/60 mt-1">
+          <p className="text-[11px] text-white/70 mt-1">
             {metrics[0].metricValue}
             {metrics[0].metricUnit} {metrics[0].metricLabel}
             {clientName && ` · ${clientName}`}
