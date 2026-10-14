@@ -146,7 +146,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     metric: "Infant to Elderly",
     gradient: "linear-gradient(140deg, #3d2c8d 0%, #a65cc9 100%)",
     featured: true,
-    liveUrl: "https://mobile-beaver-69863735.figma.site",
+    liveUrl: "https://nutrichat-seven.vercel.app",
     homeScreenshot: "/images/nutrichat/home.png",
     screenshots: [
       { src: "/images/nutrichat/chat-home.png", label: "Chat home — life-stage selector" },
